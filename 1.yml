@@ -1,0 +1,36 @@
+name: Python Tests
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '2.x'
+        architecture: 'x64'
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Run tests in Python 2
+      run: pytest
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+        architecture: 'x64'
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Run tests in Python 3
+      run: pytest
